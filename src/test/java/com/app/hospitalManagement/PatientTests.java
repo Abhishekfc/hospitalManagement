@@ -13,6 +13,9 @@ import java.util.Objects;
 
 import com.app.hospitalManagement.entity.Patient;
 import com.app.hospitalManagement.repository.PatientRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 @SpringBootTest
 public class PatientTests {
@@ -43,12 +46,12 @@ public class PatientTests {
 
 //        List<Patient> patientList = patientRepository.findByBornAfterDate(LocalDate.of(2003, 8, 7));
 
-//        List<Patient> patientList = patientRepository.findAllPatients();
-//
-//        for (Patient patient : patientList) {
-//            System.out.println(patient);
-//        }
-//
+        Page<Patient> patientList = patientRepository.findAllPatients(PageRequest.of(0, 2, Sort.by("name")));
+
+        for (Patient patient : patientList) {
+            System.out.println(patient);
+        }
+
 //        List<Object[]> bloodGroupList = patientRepository.countEachBloodGroupType();
 //
 //        for(Object[] objects: bloodGroupList){
@@ -57,10 +60,11 @@ public class PatientTests {
 
 //        int rowsUpdated = patientRepository.updateNameWithId("Riya Bansal", 3L);
 //        System.out.println(rowsUpdated);
-        List<BloodGroupCountResponseEntity> bloodGroupList = patientRepository.countEachBloodGroupType();
-        for (BloodGroupCountResponseEntity bloodGroupCountResponse : bloodGroupList) {
-            System.out.println(bloodGroupCountResponse);
-        }
+
+//        List<BloodGroupCountResponseEntity> bloodGroupList = patientRepository.countEachBloodGroupType();
+//        for (BloodGroupCountResponseEntity bloodGroupCountResponse : bloodGroupList) {
+//            System.out.println(bloodGroupCountResponse);
+//        }
 
 
     }
