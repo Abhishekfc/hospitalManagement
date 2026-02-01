@@ -2,6 +2,7 @@ package com.app.hospitalManagement.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.app.hospitalManagement.entity.type.BloodGroupType;
 import jakarta.persistence.*;
@@ -51,6 +52,14 @@ public class Patient {
 
     @Enumerated(EnumType.STRING)
     private BloodGroupType bloodGroup;
+
+    @OneToOne
+    @JoinColumn(name = "patient_insurance_id")  // owning side
+    private Insurance insurance;
+
+    @OneToMany(mappedBy = "patient")
+    private List<Appointment> appointments;
+
 
 
 }
