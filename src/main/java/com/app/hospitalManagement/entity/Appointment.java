@@ -15,19 +15,21 @@ import java.time.LocalDateTime;
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private LocalDateTime appointmentTime;
 
-    @Column(length = 50)
+    @Column(length = 500)
     private String reason;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "patient_id", nullable = false) //Patient is required and not nullable
     private  Patient patient;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
     @JoinColumn(nullable = false)
     private Doctor doctor;
 }
